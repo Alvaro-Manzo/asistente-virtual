@@ -1,0 +1,38 @@
+# Ignorar archivos del entorno virtual
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Ignorar archivos del sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignorar archivos de VSCode
+.vscode/
+*.code-workspace
+
+# Ignorar archivos temporales
+*.tmp
+*.temp
+*.log
+
+# Archivos de tareas (generados automáticamente)
+tareas.txt
+
+# Archivos de configuración local
+*.local
+*.env
+.env

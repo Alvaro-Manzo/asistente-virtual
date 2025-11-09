@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏅 Maestro Fibonacci Certificado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #4c63c9 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            overflow-x: auto;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .certificate {
+            background: linear-gradient(45deg, #ffffff, #f8f9fa);
+            color: #333;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: 100%;
+            border: 5px solid #FFD700;
+            position: relative;
+            animation: glow 2s ease-in-out infinite alternate;
+            overflow-y: auto;
+            margin: 20px auto;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 20px #FFD700, 0 0 30px #FFD700, 0 0 40px #FFD700;
+            }
+            to {
+                box-shadow: 0 0 30px #FFD700, 0 0 40px #FFD700, 0 0 50px #FFD700;
+            }
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: clamp(1.5em, 5vw, 3em);
+            color: #8B4513;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: clamp(1em, 3vw, 1.5em);
+            color: #666;
+            font-style: italic;
+        }
+
+        .medal {
+            font-size: clamp(3em, 8vw, 6em);
+            margin: 15px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .content {
+            margin: 20px 0;
+            line-height: 1.6;
+            font-size: clamp(0.9em, 2.5vw, 1.2em);
+        }
+
+        .name-field {
+            background: rgba(255, 215, 0, 0.2);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: clamp(1em, 3vw, 1.5em);
+            font-weight: bold;
+            color: #8B4513;
+            border: 2px dashed #FFD700;
+        }
+
+        .sequence {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-size: clamp(0.8em, 2.5vw, 1.2em);
+            letter-spacing: 2px;
+            color: #333;
+            border-left: 5px solid #FFD700;
+            overflow-x: auto;
+        }
+
+        .signature {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .signature-line {
+            border-bottom: 2px solid #333;
+            width: 150px;
+            padding-bottom: 5px;
+            text-align: center;
+            font-size: clamp(0.8em, 2vw, 1em);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-style: italic;
+            color: #666;
+            font-size: clamp(0.8em, 2vw, 1em);
+        }
+
+        .sparkle {
+            position: absolute;
+            animation: sparkle 3s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+
+        .sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 20%; right: 15%; animation-delay: 0.5s; }
+        .sparkle:nth-child(3) { bottom: 30%; left: 20%; animation-delay: 1s; }
+        .sparkle:nth-child(4) { bottom: 10%; right: 10%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { top: 50%; left: 5%; animation-delay: 2s; }
+        .sparkle:nth-child(6) { top: 70%; right: 5%; animation-delay: 2.5s; }
+
+        .close-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #FF6B6B;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            z-index: 1000;
+        }
+
+        .close-button:hover {
+            background: #FF5252;
+        }
+
+        .fullscreen-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #4ECDC4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+            z-index: 1000;
+        }
+
+        .fullscreen-button:hover {
+            background: #45B7D1;
+        }
+
+        /* Media queries para dispositivos móviles */
+        @media (max-width: 768px) {
+            .certificate {
+                padding: 20px;
+                margin: 10px;
+                max-width: 95vw;
+            }
+            
+            .signature {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .signature-line {
+                width: 120px;
+            }
+            
+            .sequence {
+                font-size: 0.9em;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certificate {
+                padding: 15px;
+                margin: 5px;
+            }
+            
+            .header {
+                margin-bottom: 20px;
+            }
+            
+            .content {
+                margin: 15px 0;
+            }
+        }
+
+        /* Modo pantalla completa */
+        .fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            max-width: none;
+            max-height: none;
+            margin: 0;
+            border-radius: 0;
+            overflow-y: auto;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkle">✨</div>
+    <div class="sparkle">⭐</div>
+    <div class="sparkle">💫</div>
+    <div class="sparkle">🌟</div>
+    <div class="sparkle">✨</div>
+    <div class="sparkle">⭐</div>
+
+    <button class="close-button" onclick="window.close()">Cerrar</button>
+    <button class="fullscreen-button" onclick="toggleFullscreen()">📺 Pantalla Completa</button>
+
+    <div class="certificate">
+        <div class="header">
+            <h1 class="title">CERTIFICADO OFICIAL</h1>
+            <p class="subtitle">Maestro en Secuencias Matemáticas</p>
+        </div>
+
+        <div class="medal">🏅</div>
+
+        <div class="content">
+            <p>Por la presente se certifica que</p>
+            
+            <div class="name-field">
+                <strong>EL USUARIO DEL ASISTENTE JORGE</strong>
+            </div>
+
+            <p>Ha demostrado <strong>EXCELENCIA MATEMÁTICA</strong> al descifrar correctamente</p>
+            <p>la famosa <strong>SECUENCIA DE FIBONACCI</strong></p>
+
+            <div class="sequence">
+                1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144...
+            </div>
+
+            <p>Y por tanto se le otorga el título honorífico de</p>
+            
+            <h2 style="color: #8B4513; font-size: clamp(1.5em, 4vw, 2.5em); margin: 20px 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                🌟 MAESTRO FIBONACCI 🌟
+            </h2>
+
+            <p style="font-style: italic; color: #666;">
+                "Que nunca te falte la secuencia en tu vida"
+            </p>
+        </div>
+
+        <div class="signature">
+            <div>
+                <div class="signature-line">Jorge IA</div>
+                <small>Asistente Virtual Certificador</small>
+            </div>
+            
+            <div>
+                <div class="signature-line" id="fecha"></div>
+                <small>Fecha de Certificación</small>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Este certificado ha sido generado por el Asistente Virtual Jorge</p>
+            <p>HECHO POR : ALVARO YAMIL MANZO AYORA</p>
+        </div>
+    </div>
+
+    <script>
+        // Mostrar la fecha actual
+        document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-ES');
+        
+        // Función para pantalla completa
+        function toggleFullscreen() {
+            const certificate = document.querySelector('.certificate');
+            const button = document.querySelector('.fullscreen-button');
+            
+            if (certificate.classList.contains('fullscreen')) {
+                certificate.classList.remove('fullscreen');
+                button.textContent = '📺 Pantalla Completa';
+            } else {
+                certificate.classList.add('fullscreen');
+                button.textContent = '🔽 Salir Pantalla Completa';
+            }
+        }
+        
+        // Ajuste automático de scroll
+        function adjustScroll() {
+            const certificate = document.querySelector('.certificate');
+            if (certificate.scrollHeight > window.innerHeight) {
+                certificate.style.alignSelf = 'flex-start';
+                document.body.style.alignItems = 'flex-start';
+                document.body.style.paddingTop = '80px';
+                document.body.style.paddingBottom = '40px';
+            }
+        }
+        
+        // Ejecutar ajuste al cargar y redimensionar
+        window.addEventListener('load', adjustScroll);
+        window.addEventListener('resize', adjustScroll);
+        
+        // Efectos de sonido al cargar (si el navegador lo permite)
+        try {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // Do
+            oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.2); // Mi
+            oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.4); // Sol
+            
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.6);
+            
+            oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.6);
+        } catch (e) {
+            console.log('Audio no disponible');
+        }
+        
+        // Confeti cayendo
+        function createConfetti() {
+            const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.innerHTML = '🎉';
+                    confetti.style.position = 'fixed';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = '-10px';
+                    confetti.style.fontSize = Math.random() * 20 + 10 + 'px';
+                    confetti.style.zIndex = '1000';
+                    confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                    
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        @keyframes fall {
+                            to {
+                                transform: translateY(100vh) rotate(360deg);
+                                opacity: 0;
+                            }
+                        }
+                    `;
+                    document.head.appendChild(style);
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 5000);
+                }, i * 100);
+            }
+        }
+        
+        // Iniciar confeti después de un momento
+        setTimeout(createConfetti, 500);
+    </script>
+</body>
+</html>
