@@ -256,4 +256,4 @@ chmod +x install.sh && ./install.sh && ./run.sh
 "dato matemático"          # 🧠 Learn something new
 ```
 
-**¡Jorge v2.0 está listo para ayudarte! 🚀**
+**¡Jorge v2.0 está listo para ayudarte! :) 🚀**
