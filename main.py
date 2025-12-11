@@ -664,9 +664,13 @@ def pedir_cosas():
             hablar("Esto es lo que he encontrado ")
             continue
         elif "reproducir" in pedido:
-
-            hablar("Ok, ya lo voy a empezar a reproducir")
-            pywhatkit.playonyt(pedido)
+            hablar("Ok, ya lo voy a empezar a reproducir en YouTube")
+            # Extraer el nombre de la canción/video
+            busqueda = pedido.replace("reproducir", "").strip()
+            # Abrir YouTube con la búsqueda directamente en el navegador
+            url_youtube = f"https://www.youtube.com/results?search_query={busqueda.replace(' ', '+')}"
+            webbrowser.open(url_youtube)
+            print(f"🎵 Buscando en YouTube: {busqueda}")
             continue
 
         elif "chiste" in pedido:
@@ -921,7 +925,6 @@ def pedir_cosas():
 
         elif "mi certificado" in pedido or "certificado fibonacci" in pedido or "maestro fibonacci" in pedido:
             try:
-                import os
                 archivo_certificado = os.path.join(os.getcwd(), "certificado_fibonacci.html")
                 if os.path.exists(archivo_certificado):
                     hablar("Abriendo tu certificado de Maestro Fibonacci")
@@ -945,7 +948,6 @@ def pedir_cosas():
                 
                 # Abrir certificado HTML
                 try:
-                    import os
                     archivo_certificado = os.path.join(os.getcwd(), "certificado_fibonacci.html")
                     hablar("Abriendo tu certificado oficial de Maestro Fibonacci")
                     webbrowser.open(f"file://{archivo_certificado}")
@@ -1063,6 +1065,21 @@ def pedir_cosas():
 
         elif "qué puedes hacer" in pedido or "ayuda" in pedido:
             hablar("Puedo hacer muchas cosas: reproducir música, buscar en internet, contar chistes, dar el clima, jugar contigo, crear recordatorios, generar contraseñas, darte consejos de salud, citas filosóficas, trabalenguas, adivinanzas, administrar tareas, y mucho más. ¡Solo pídeme lo que necesites!")
+            continue
+
+        elif "meme" in pedido:
+            hablar("Ahí te va un meme")
+            try:
+                archivo_audio = os.path.join(os.getcwd(), "ya-llegaron-las-pipsash.mp3")
+                if os.path.exists(archivo_audio):
+                    subprocess.run(["open", archivo_audio])
+                    print("🎵 Reproduciendo audio...")
+                else:
+                    hablar("No encuentro el archivo de audio")
+                    print("❌ Archivo ya-llegaron-las-pipsash.mp3 no encontrado")
+            except Exception as e:
+                print(f"Error al reproducir: {e}")
+                hablar("Hubo un problema al reproducir el meme")
             continue
 
 
